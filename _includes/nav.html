@@ -43,7 +43,7 @@
 <!-- SearchBox widget will appear here -->
 </div>
 
-<div id="hits">
+<div id="hits-container">
 <!-- Hits widget will appear here -->
 </div>
 <!-- google search-->
@@ -75,9 +75,16 @@
     // initialize hits widget
     search.addWidget(
         instantsearch.widgets.hits({
-        container: '#hits'
+            container: '#hits-container',
+            templates: {
+            empty: 'No results',
+            item: '<div><h1><a href="{{{url}}}">{{title}}</a></h1><strong>{{{ subtitle }}}</strong>{{{_highlightResult.name.value}}}</div>'
+            },
+            escapeHits: true,
+            transformItems: items => items.map(item => item),
         })
     );
+    
 
 
     search.start();
