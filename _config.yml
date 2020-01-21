@@ -27,7 +27,7 @@ github_username:    jonghyeok34
 highlighter: rouge
 permalink: pretty
 paginate: 10
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md"]
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md","README.zh.md", "Rakefile", "Gemfile"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 # If you have timezone issue (e.g. #68) in China, uncomment to use this:
 #timezone: CN  
@@ -38,7 +38,7 @@ anchorjs: true                          # if you want to customize anchor. check
 # from PR#40, to support local preview for Jekyll 3.0
 # make sure you have this gem installed
 # `$ gem install jekyll-paginate`
-plugins: [jekyll-paginate]
+plugins: [jekyll-paginate, jekyll-algolia]
 
 
 # algolia for search
@@ -50,6 +50,8 @@ algolia:
   index_name: github_blog
   search_only_api_key: f1ff3892a36e1ccc7cd4e5e623fa4a89
   # powered_by             :  true (default), false
+  files_to_exclude: []
+  nodes_to_index: github_blog
 
 # Markdown settings
 # replace redcarpet to kramdown,
