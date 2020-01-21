@@ -79,7 +79,7 @@ netease_comment: false
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "cosnsistently grow<br>매일 매일 성장하기"
-sidebar-avatar: /img/avatar-hux-ny.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/avatar-tree.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
 
