@@ -3,8 +3,8 @@ title: Hyeok's Blog
 SEOTitle: 개발자 혁의 블로그 | Hyeok's Blog
 header-img: img/home-bg.jpg
 email: jonghyeok34@gmail.com
-description: "웹 | Web & Mobile，Software Engineer，UX Designer | 这里是 @Hux黄玄 的个人博客，与你一起发现更大的世界。"
-keyword: "혁, 개발, developement, backend, python, 파이썬, go, golang, 인공지능, ai, big data, 빅데이타, Web, JavaScript, aws"
+description: "웹 | Full Stack Developer | Software Engineer | Data scientist | 풀스택 개발자, 소프트웨어 개발자, 데이터 사이언티스트"
+keyword: "혁, 개발, developement, backend, python, 파이썬, go, golang, 인공지능, ai, big data, 빅데이터, Web, JavaScript, aws"
 url: "https://jonghyeok34.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
