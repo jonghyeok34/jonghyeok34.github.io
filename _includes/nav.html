@@ -122,6 +122,8 @@
         search.start();
     </script>
     <script>
+    let searchWindow = document.getElementsByClassName('search-content-wrapper')[0];
+    searchWindow.style.display = 'none';
         /*  */
         const searchIcon = document.getElementsByClassName('icons8-search')[0].addEventListener('click',function(){
             let searchWindow = document.getElementsByClassName('search-content-wrapper')[0];

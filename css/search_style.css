@@ -45,8 +45,16 @@
     display: none;
 }
 
-.search-content-wrapper {
+.search-content-container {
 
-    width: 90%;
+    position: absolute;
+    width: 100%;
+    background-color: white;
+    z-index: 10;
+    top: 7rem;
+}
+
+.search-content-wrapper {
+    width: 80%;
     margin: 0 auto;
 }
