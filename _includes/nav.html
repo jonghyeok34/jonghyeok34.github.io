@@ -23,6 +23,9 @@
             
                 <ul class="nav navbar-nav navbar-right">
                     <li>
+                        <span class=""></span>
+                    </li>
+                    <li>
                         <a href="{{ site.baseurl }}/">Home</a>
                     </li>
                     {% for page in site.pages %}
@@ -39,12 +42,10 @@
     </div>
     <!-- /.container -->
 </nav>
-<div id="search-box">
-<!-- SearchBox widget will appear here -->
-</div>
-
-<div id="hits-container">
-<!-- Hits widget will appear here -->
+<div class="search-content-wrapper">
+    <div id="search-searchbar"></div>
+    <h1 class="page-heading">Searched Posts</h1>
+    <div class="post-list" id="search-hits"></div>
 </div>
 <!-- google search-->
 <!-- <script async src="https://cse.google.com/cse.js?cx=000737774139442002237:oflx4mtgklw"></script>
@@ -58,37 +59,82 @@
 
 <!-- algolia -->
 <script>
-    const search = instantsearch({
-        appId: '{{site.algolia.application_id}}',
-        apiKey: '{{site.algolia.search_only_api_key}}',
-        indexName: '{{site.algolia.index_name}}',
-        routing: true
-    });
-        // initialize SearchBox
-    search.addWidget(
-        instantsearch.widgets.searchBox({
-        container: '#search-box',
-        placeholder: 'Search for products'
-        })
-    );
+        
+        const search = instantsearch({
+            appId: '{{site.algolia.application_id}}',
+            apiKey: '{{site.algolia.search_only_api_key}}',
+            indexName: '{{site.algolia.index_name}}',
+            routing: true
+        });
+        const hitTemplate = function(hit) {
+            let date = '';
+            if (hit.date) {
+                date = moment.unix(hit.date).format('MMM D, YYYY');
+            }
 
-    // initialize hits widget
-    search.addWidget(
+            let url = `{{ site.baseurl }}${hit.url}#${hit.anchor}`;
+
+            const title = hit._highlightResult.title.value;
+            const subtitle = hit.subtitle;
+            const author = hit.author;
+            let breadcrumbs = '';
+            if (hit._highlightResult.headings) {
+                breadcrumbs = hit._highlightResult.headings.map(match => {
+                return `<span class="post-breadcrumb">${match.value}</span>`
+                }).join(' > ')
+            }
+
+            const content = hit._highlightResult.matchedWords;
+
+            return `
+                <div class="post-item">
+                <a class="post-link" href="${url}">
+                    <h2 class='post-title'>${title}</h2>
+                    <h3 class='post-subtitle'>${subtitle}</h3>
+                </a>
+                <span class="post-meta">
+                    Posted by ${author} in ${date}
+                </div>
+            `;
+        }
+                // Adding searchbar and results widgets
+        search.addWidget(
+            instantsearch.widgets.searchBox({
+                container: '#search-searchbar',
+                placeholder: 'Search into posts...',
+                poweredBy: true // This is required if you're on the free Community plan
+            })
+        );
+        search.addWidget(
         instantsearch.widgets.hits({
-            container: '#hits-container',
+            container: '#search-hits',
             templates: {
-            empty: 'No results',
-            item: '<div><h1><a href="{{{url}}}">{{title}}</a></h1><strong>{{{ subtitle }}}</strong>{{{_highlightResult.name.value}}}</div>'
-            },
-            escapeHits: true,
-            transformItems: items => items.map(item => item),
+            item: hitTemplate
+            }
         })
-    );
-    
+        );
+        search.addWidget(
+            instantsearch.widgets.hits({
+                container: '#search-hits'
+            })
+        );
+        // Starting the search
+        search.start();
+    </script>
+    <script>
+        /*  */
+        const searchIcon = document.getElementsByClassName('icons8-search')[0].addEventListener('click',function(){
+            let searchWindow = document.getElementsByClassName('search-content-wrapper')[0];
+            if(searchWindow.style.display== 'none'){
+                document.getElementsByClassName('search-content-wrapper')[0].style.display = 'block'
+                searchWindow.style.display= 'block';
+            }else{
+                searchWindow.style.display = 'none';
+            }
+        })
+        
+    </script>
 
-
-    search.start();
-</script>
 <script>
     // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
